@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="./style/main.css" rel="stylesheet">
+    <link href="./style/menu.css" rel="stylesheet">
+    <link href="./style/notaFiscal.css" rel="stylesheet">
+    <link rel="icon" href="img/Icon.png" type="image/x-icon" />
+    <link href="./style/Modal.css" type="stylesheet" />
+
+    <link rel="stylesheet" href="style/camera.css">
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>	
+
+    <title>Leitor NF</title>
+</head>
+<body>
+    <header>
+        <input type="checkbox" id="checkMenu">
+        <label id="labelCheckMenu" for="checkMenu">
+            <img id="imgMenu" src="img/menu.png" alt="menu">
+        </label>
+
+        <nav>
+            <ul>
+                <li><a class="itensMenu" href="home.html">&nbsp;Início</a></li>
+                <li>
+                    <a class="itensMenu" href="notaFiscal.html">&nbsp;Incluir Nota Fiscal</a>
+                </li>
+                <li><a class="itensMenu" href="dadosPessoais.html">&nbsp;Dados Pessoais</a></li>
+                <li><a class="itensMenu" href="meusCupons.html">&nbsp;Meus Cupons</a></li>
+                <li><a class="itensMenu" href="minhasEconomias.html">&nbsp;Minhas Economias</a></li>
+                <li><a class="itensMenu" href="login.html">&nbsp;Sair</a></li>
+            </ul>
+        </nav>
+
+        <div id="divStorie">
+            <button id="btnStorie" onclick="abrirStorie()">
+                <img id="imgStorie" src="./img/imgStorie.png" alt="Stories">
+            </button>
+        </div>
+
+    </header>
+
+    <section id="centro">
+        <video id="preview"></video>
+        <h1>Leitor de Nota Fiscal </h1> 
+
+        <script>
+            let scanner = new Instascan.Scanner(
+                {
+                    video: document.getElementById('preview')
+                }
+            );
+            scanner.addListener('scan', function(content) {
+                alert('Escaneou o conteudo: ' + content);
+                window.open(content, "_blank");
+            });
+            Instascan.Camera.getCameras().then(cameras => 
+            {
+                if(cameras.length > 0){
+                    scanner.start(cameras[0]);
+                } else {
+                    console.error("Não existe câmera no dispositivo!");
+                }
+            });   
+        </script>
+      
+    </section>
+    
+    <footer></footer>
+    <script src="./JS/storie.js"></script>
+
+</body>
+</html>

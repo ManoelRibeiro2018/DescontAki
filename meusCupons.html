@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="./style/main.css" rel="stylesheet">
+    <link href="./style/menu.css" rel="stylesheet">
+    <link href="./style/meusCupons.css" rel="stylesheet">
+    <link rel="icon" href="img/Icon.png" type="image/x-icon" />
+
+    <title>Meus Cupons</title>
+</head>
+
+<body>
+    <header>
+        <input type="checkbox" id="checkMenu">
+        <label id="labelCheckMenu" for="checkMenu">
+            <img id="imgMenu" src="img/menu.png" alt="menu">
+        </label>
+
+        <nav id="navMenu">
+            <ul>
+                <li><a class="itensMenu" href="home.html">&nbsp;Início</a></li>
+                <li>
+                    <a class="itensMenu" href="notaFiscal.html">&nbsp;Incluir Nota Fiscal</a>
+                </li>
+                <li><a class="itensMenu" href="dadosPessoais.html">&nbsp;Dados Pessoais</a></li>
+                <li><a class="itensMenu" href="meusCupons.html">&nbsp;Meus Cupons</a></li>
+                <li><a class="itensMenu" href="minhasEconomias.html">&nbsp;Minhas Economias</a></li>
+                <li><a class="itensMenu" href="login.html">&nbsp;Sair</a></li>
+            </ul>
+        </nav>
+
+        <div id="divStorie">
+            <button id="btnStorie" onclick="abrirStorie()">
+                <img id="imgStorie" src="./img/imgStorie.png" alt="Stories">
+            </button>
+        </div>
+
+    </header>
+    <section id="centro">
+        <h1>Meus Cupons</h1>
+
+        <h4>Cupons Instantâneos</h4>
+        <div id="inst">
+            <div class="cupomInst">
+                <div class="txtCupInst"> 15% de desconto nas Lojas Americanas </div>
+                <div class="btnCup" id="btnAtiv1" onclick="ativar(btnAtiv1)"> Ativar </div>
+                <div id="numCupom1" class="numCupom"></div>
+            </div>
+            <div class="cupomInst">
+                <div class="txtCupInst"> Compre 1 McOferta, ganhe 1 casquinho</div>
+                <div class="btnCup" id="btnAtiv2" onclick="ativar(btnAtiv2)"> Ativar </div>
+                <div id="numCupom2" class="numCupom"></div>
+            </div>
+            <div class="cupomInst">
+                <div class="txtCupInst"> 10% de desconto na Loja Top Internacional</div>
+                <div class="btnCup" id="btnAtiv3" onclick="ativar(btnAtiv3)"> Ativar </div>
+                <div id="numCupom3" class="numCupom"></div>
+            </div>
+        </div>
+        <!--
+        <h4>Cupons Missão</h4>
+        <div id="missao">
+            <div class="cupomMissao">
+                <div class="txtCupMis">                
+                    Estacionamento Grátis* 
+                </div>
+                <div class="btnCup" id="btnAtiv4" onclick="ativar(btnAtiv4)"> Ativar </div>
+                <small>*Válido apenas hoje</small>
+                <div class="barraProgresso">
+                    <div class="progressoConcluido"></div>
+                </div>
+                <div class="divSmall"><small>R$ 300,00</small></div>
+                <div id="numCupom4" class="numCupom"></div>
+            </div>
+            <div class="cupomMissao">
+                <div class="txtCupMis">    
+                    30% em loja de departamento*
+                </div>
+                <div class="btnCupInativo"> Ativar </div>
+                <small>*Válido até 31/10/2020</small>
+                <div class="barraProgresso">
+                    <div class="preencherProgresso"></div>
+                </div>
+                <div class="divSmall">
+                    <small>R$ 374,28</small> 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <small>R$ 1.000,00</small> 
+                </div>
+            </div>
+        </div>
+        -->
+        <br><br>
+    </section>
+    <footer></footer>
+    <script src="./JS/meusCupons.js"></script>
+    <script src="./JS/storie.js"></script>
+</body>
+
+</html>
