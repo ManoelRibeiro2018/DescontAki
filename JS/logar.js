@@ -6,10 +6,6 @@ logar.addEventListener('click', () => {
     var cpf = document.getElementById("CPF").value
     var senha = document.getElementById("senha").value 
     localStorage.setItem('cpf', cpf)
-    // localStorage.setItem('nome', '') //tirei pq se n vai puxar do bd, n pode apagar
-    // localStorage.setItem('email', '')
-    // localStorage.setItem('sexo', '')
-    // localStorage.setItem('nascimento', '')
     cpf = cpf.replace("-","").replace(".","").replace(".","")
 
 

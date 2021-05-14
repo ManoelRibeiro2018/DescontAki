@@ -42,22 +42,20 @@
     </header>
     <section id="centro">
         <h1>Meus Cupons</h1>
-
+        <select id="select" onchange="FiltrarCupom()">
+         </select>
         <h4>Cupons Instantâneos</h4>
         <div id="inst">
             <div class="cupomInst">
                 <div class="txtCupInst"> 15% de desconto nas Lojas Americanas </div>
-                <div class="btnCup" id="btnAtiv1" onclick="ativar(btnAtiv1)"> Ativar </div>
                 <div id="numCupom1" class="numCupom"></div>
             </div>
             <div class="cupomInst">
                 <div class="txtCupInst"> Compre 1 McOferta, ganhe 1 casquinho</div>
-                <div class="btnCup" id="btnAtiv2" onclick="ativar(btnAtiv2)"> Ativar </div>
                 <div id="numCupom2" class="numCupom"></div>
             </div>
             <div class="cupomInst">
                 <div class="txtCupInst"> 10% de desconto na Loja Top Internacional</div>
-                <div class="btnCup" id="btnAtiv3" onclick="ativar(btnAtiv3)"> Ativar </div>
                 <div id="numCupom3" class="numCupom"></div>
             </div>
         </div>
