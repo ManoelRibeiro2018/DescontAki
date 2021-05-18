@@ -1,42 +1,49 @@
-var cup1 = 0
-var cup2 = 0
-var cup3 = 0
-var cup4 = 0
+// Trazendo informação das categorias
+            
+            fetch(`http://pblelcoma-final.herokuapp.com/categoria`,
+            {
+                method: 'GET',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer'            
+            })
+            .then(response => {
+                if (!response.ok)
+                {
+                    throw Error(response.statusText); 
+                }
 
-function ativar(btn){
-    btn.innerHTML = `Ativo`
-    btn.style.backgroundColor ='rgb(54, 53, 53)'
-    btn.style.paddingRight ='0.8rem'
-    btn.style.paddingLeft ='0.7rem'
+                response.json().then(function(result){
 
-    if(btn == btnAtiv1 && cup1 == 0){
-        mostrarCupom(numCupom1)
-        cup1++
-    } else if(btn == btnAtiv2 && cup2 == 0){
-        mostrarCupom(numCupom2)
-        cup2++
-    } else if(btn == btnAtiv3 && cup3 == 0){
-        mostrarCupom(numCupom3)
-        cup3++
-    } else if(btn == btnAtiv4 && cup4 == 0){
-        mostrarCupomMissao(numCupom4)
-        cup4++
-    }
-}
+                    for (let index = 0; index < result.length; index++) {
+                        var element_pai = document.getElementById("select");
+                        var options = document.createElement('option');
+                        options.text = result[index].descricao;
+                        element_pai.appendChild(options);    
+                        options.value = result[index].id;                                          
+                    }           
+                })
 
-function mostrarCupom(numCupom){
-    numCupom.style.display = 'block'
-    numCupom.innerHTML = `Utilize o código: CYD - ${Math.floor(Math.random()*10000)}`
-
-}
-
-function mostrarCupomMissao(numCupom){
-    numCupom.style.display = 'block'
-    numCupom.innerHTML = `Utilize o código: CYD - ${Math.floor(Math.random()*10000)}`
-}
+            }).catch(function(error){
+                console.log(error);
+            })
 
 
-    fetch(`http://pblelcoma-final.herokuapp.com/categoria`,
+        function FiltrarPorCategoria(){
+            var select = document.getElementById("select").value
+            this.Cupons(select);
+        }
+
+        
+// Tazendo informações do cupom /cupons/categoria?idCategoria=1&idUsuario=455
+
+    function Cupons(select){         
+        
+        
+
+    fetch(`http://pblelcoma-final.herokuapp.com/cupons/categoria?idCategoria=${select}&idUsuario=${455}`,
     {
         method: 'GET',
         mode: 'cors',
@@ -52,13 +59,16 @@ function mostrarCupomMissao(numCupom){
         }
 
         response.json().then(function(result){
-
             for (let index = 0; index < result.length; index++) {
-                var element_pai = document.getElementById("select");
-                var options = document.createElement('option');
-                options.text = result[index].descricao;
-                element_pai.appendChild(options);    
-                options.value = result[index].id;                                          
+
+                var elemtent_pai = document.getElementById("inst");
+                var divCupomInst = document.createElement("div");
+                divCupomInst.className = "cupomInst";
+                elemtent_pai.appendChild(divCupomInst)
+                var divTxtCupInst = document.createElement('div');
+                div.className = "txtCupInst";
+                elemtent_pai.appendChild(divTxtCupInst);
+                div.textContent = result[index].descricao;                                         
             }           
         })
 
@@ -66,11 +76,5 @@ function mostrarCupomMissao(numCupom){
         console.log(error);
     })
 
-
-function FiltrarCupom(){
-
-    var select = document.getElementById("select").value
-    console.log(select);
-
-    //TODO - IMPLEMENTAR FECT
 }
+        

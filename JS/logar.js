@@ -15,6 +15,7 @@ logar.addEventListener('click', () => {
     const validarConta = (data) =>  {
         for (const atributos in data){
             if (data["cpf"] == cpf && data["senha"] == senha){
+                localStorage.setItem("CodSession", data["id"])
                 window.location.href = "home.html"
             } 
             else if (modal)
