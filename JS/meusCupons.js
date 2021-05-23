@@ -73,7 +73,9 @@
                 divCupomInst.appendChild(p);
                 h2.textContent = result[index].nomeLoja;                  
                 p.textContent = result[index].titulo +" - " + result[index].descricao + ", no valor de: "+ result[index].valor +"%";             
-                console.log(divCupomInst.className.length <= 0 );  
+                console.log(divCupomInst.className.length <= 0 ); 
+                h2.className = "Pcupom";
+                p.className = "H2cupom"; 
                 
             }           
         })
