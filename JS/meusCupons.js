@@ -1,5 +1,10 @@
+
+
+ var elemtent_pai_inst = document.getElementById("inst");
+ var divCupomInst = "";
+
 // Trazendo informação das categorias
-            
+/*            
             fetch(`http://pblelcoma-final.herokuapp.com/categoria`,
             {
                 method: 'GET',
@@ -36,14 +41,11 @@
             this.Cupons(select);
         }
 
-        
+  */      
 // Tazendo informações do cupom /cupons/categoria?idCategoria=1&idUsuario=455
 
-    function Cupons(select){         
-        
-        
 
-    fetch(`http://pblelcoma-final.herokuapp.com/cupons/categoria?idCategoria=${select}&idUsuario=${455}`,
+    fetch(`http://pblelcoma-final.herokuapp.com/cupons/categoria?idCategoria=${1}&idUsuario=${455}`,
     {
         method: 'GET',
         mode: 'cors',
@@ -59,16 +61,20 @@
         }
 
         response.json().then(function(result){
-            for (let index = 0; index < result.length; index++) {
-
-                var elemtent_pai = document.getElementById("inst");
-                var divCupomInst = document.createElement("div");
+            for (let index = 0; index < result.length; index++) 
+            {
+                console.log(result);
+                divCupomInst = document.createElement("div");
+                elemtent_pai_inst.appendChild(divCupomInst);
                 divCupomInst.className = "cupomInst";
-                elemtent_pai.appendChild(divCupomInst)
-                var divTxtCupInst = document.createElement('div');
-                div.className = "txtCupInst";
-                elemtent_pai.appendChild(divTxtCupInst);
-                div.textContent = result[index].descricao;                                         
+                var h2 = document.createElement("h4");
+                var p =  document.createElement("p");
+                divCupomInst.appendChild(h2);
+                divCupomInst.appendChild(p);
+                h2.textContent = result[index].nomeLoja;                  
+                p.textContent = result[index].titulo +" - " + result[index].descricao + ", no valor de: "+ result[index].valor +"%";             
+                console.log(divCupomInst.className.length <= 0 );  
+                
             }           
         })
 
@@ -76,5 +82,17 @@
         console.log(error);
     })
 
+
+//[MANOEL] função para verificar se os cards exitem, e limpar
+/*
+function limparCards(){
+    console.log(divCupomInst)
+    while(divCupomInst != ""  && divCupomInst != null)
+    {       
+        this.divCupomInst.remove();
+        break;
+    }
+
 }
+*/
         
