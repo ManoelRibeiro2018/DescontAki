@@ -44,8 +44,9 @@
   */      
 // Tazendo informações do cupom /cupons/categoria?idCategoria=1&idUsuario=455
 
+var codigoUsuairo = localStorage.getItem("CodSession");
 
-    fetch(`http://pblelcoma-final.herokuapp.com/cupons/categoria?idCategoria=${1}&idUsuario=${455}`,
+    fetch(`http://pblelcoma-final.herokuapp.com/cupons/usuario/${codigoUsuairo}`,
     {
         method: 'GET',
         mode: 'cors',
@@ -61,27 +62,38 @@
         }
 
         response.json().then(function(result){
-            for (let index = 0; index < result.length; index++) 
-            {
-                console.log(result);
-                divCupomInst = document.createElement("div");
-                elemtent_pai_inst.appendChild(divCupomInst);
-                divCupomInst.className = "cupomInst";
-                var h2 = document.createElement("h4");
-                var p =  document.createElement("p");
-                divCupomInst.appendChild(h2);
-                divCupomInst.appendChild(p);
-                h2.textContent = result[index].nomeLoja;                  
-                p.textContent = result[index].titulo +" - " + result[index].descricao + ", no valor de: "+ result[index].valor +"%";             
-                console.log(divCupomInst.className.length <= 0 ); 
-                h2.className = "Pcupom";
-                p.className = "H2cupom"; 
+            if(result.length == 0){
                 
-            }           
+                    h2 = document.createElement("h2")
+                    elemtent_pai_inst.appendChild(h2)
+                    h2.textContent = "Nenhum Cupom encontrado!!!"
+            }
+            else{
+                    for (let index = 0; index < result.length; index++) 
+                    {
+                        console.log(result);
+                        divCupomInst = document.createElement("div");
+                        elemtent_pai_inst.appendChild(divCupomInst);
+                        divCupomInst.className = "cupomInst";
+                        var h2 = document.createElement("h4");
+                        var p =  document.createElement("p");
+                        divCupomInst.appendChild(h2);
+                        divCupomInst.appendChild(p);
+                        h2.textContent = result[index].nomeLoja;                  
+                        p.textContent = result[index].titulo +" - " + result[index].descricao + ", no valor de: "+ result[index].valor +"%";             
+                        console.log(divCupomInst.className.length <= 0 ); 
+                        h2.className = "Pcupom";
+                        p.className = "H2cupom"; 
+                        
+                    }   
+                }        
         })
 
     }).catch(function(error){
         console.log(error);
+        h1 = document.createElement("h1")
+        elemtent_pai_inst.appendChild(h1)
+        h1.textContent = "Nenhum Cupom encontrado!!!"
     })
 
 
