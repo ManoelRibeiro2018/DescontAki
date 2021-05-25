@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link href="./style/main.css" rel="stylesheet">
     <link href="./style/menu.css" rel="stylesheet">
     <link href="./style/notaFiscal.css" rel="stylesheet">
@@ -12,11 +12,15 @@
     <link href="./style/Modal.css" type="stylesheet" />
 
     <link rel="stylesheet" href="style/camera.css">
-    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>	
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 
     <title>Leitor NF</title>
 </head>
+
 <body>
+    <div id="loading">
+        <img id="loading-image" src="img/load.gif" alt="Loading..." />
+    </div>
     <header>
         <input type="checkbox" id="checkMenu">
         <label id="labelCheckMenu" for="checkMenu">
@@ -46,7 +50,7 @@
 
     <section id="centro">
         <video id="preview"></video>
-        <h1>Leitor de Nota Fiscal </h1> 
+        <h1>Leitor de Nota Fiscal </h1>
 
         <script>
             let scanner = new Instascan.Scanner(
@@ -54,24 +58,32 @@
                     video: document.getElementById('preview')
                 }
             );
-            scanner.addListener('scan', function(content) {
+            scanner.addListener('scan', function (content) {
                 alert('Escaneou o conteudo: ' + content);
                 window.open(content, "_blank");
             });
-            Instascan.Camera.getCameras().then(cameras => 
-            {
-                if(cameras.length > 0){
+            Instascan.Camera.getCameras().then(cameras => {
+                if (cameras.length > 0) {
                     scanner.start(cameras[0]);
+                    dismissLoad();
                 } else {
                     console.error("Não existe câmera no dispositivo!");
+                    dismissLoad();
                 }
-            });   
+            });
+
+            function dismissLoad() {
+                setTimeout(function () {
+                    document.getElementById("loading").style.display = 'none';
+                }, 2000);
+            }
         </script>
-      
+
     </section>
-    
+
     <footer></footer>
     <script src="./JS/storie.js"></script>
 
 </body>
+
 </html>
