@@ -70,13 +70,33 @@
                 scanner.stop();
             });
             Instascan.Camera.getCameras().then(cameras => {
+                let selectedCamera;
+
+                // Tratamento para pegar a camera traseira do smartphone
                 if (cameras.length > 0) {
-                    scanner.start(cameras[0]);
+                    for (let c = 0; c < cameras.length; c++) {
+                        if (cameras[c].name.indexOf('back') != -1) {
+                            selectedCamera = cameras[c];
+                        }
+                    }
+
+                    if (!selectedCamera) selectedCamera = cameras[0];
+                }
+
+                if (selectedCamera) {
+                    scanner.start(selectedCamera);
                     dismissLoad();
                 } else {
                     console.error("Não existe câmera no dispositivo!");
                     dismissLoad();
                 }
+                // if (cameras.length > 0) {
+                //     scanner.start(cameras[0]);
+                //     dismissLoad();
+                // } else {
+                //     console.error("Não existe câmera no dispositivo!");
+                //     dismissLoad();
+                // }
             });
 
             function startVideo() {
