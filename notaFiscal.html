@@ -61,7 +61,13 @@
         <script>
             let scanner = new Instascan.Scanner(
                 {
-                    video: document.getElementById('preview')
+                    video: document.getElementById('preview'),
+                    continuous: true,
+                    mirror: false,
+                    captureImage: false,
+                    backgroundScan: true,
+                    refractoryPeriod: 1000,
+                    scanPeriod: 1
                 }
             );
             scanner.addListener('scan', function (content) {
