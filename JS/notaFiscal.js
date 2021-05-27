@@ -22,4 +22,5 @@ function showNewInvoice() {
 }
 function hiddenNewInvoice() {
     document.getElementById('newInvoice').style.display = "none";
+    document.getElementById('preview').style.display = "block";
 }
