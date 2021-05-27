@@ -1,12 +1,5 @@
-video{
-height: 600px;
-width: 500px;
-position: absolute;
-bottom: 0;
-right: 0;
-left: 0;
-top: 600px;
-margin: auto;
+video {
+    height: 250px;
+    width: 100%;
+    margin: 120px 0 50px 0px;
 }
-
-
