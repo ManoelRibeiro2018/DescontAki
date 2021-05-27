@@ -84,10 +84,10 @@ label{
 
 #divCheck{
     margin-top: 0.7rem;
-    padding:0.5rem 0rem;
-    /*display: flex; /*Se tirar isso, as palavras vão para baixo no quadrado.*/
-    /* text-align: left;    */
-    /* Se alinhar no centro, tira o margin right do check */
+    padding: 0.5rem 0rem;
+    text-align: left;
+    width: 300px;
+    display: inline-flex;
 }
 
 #check{
