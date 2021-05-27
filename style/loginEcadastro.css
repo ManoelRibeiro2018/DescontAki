@@ -1,4 +1,6 @@
-
+body {
+    background-color: rgba(0, 0, 0, .80);
+}
 div#imgLogo {
     text-align: center; 
     margin-top: 20px;
@@ -13,7 +15,6 @@ div.form{
     text-align: center;  
     margin: auto;
     max-width: 40rem;
-    background-color: rgba(0, 0, 0, .80);
     padding: 0px 0px 5px 5px;
     border-radius: 30px;
 }
@@ -84,8 +85,8 @@ label{
 #divCheck{
     margin-top: 0.7rem;
     padding:0.5rem 0rem;
-    display: flex; /*Se tirar isso, as palavras vão para baixo no quadrado.*/
-    text-align: left;   
+    /*display: flex; /*Se tirar isso, as palavras vão para baixo no quadrado.*/
+    /* text-align: left;    */
     /* Se alinhar no centro, tira o margin right do check */
 }
 
