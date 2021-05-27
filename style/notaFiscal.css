@@ -99,9 +99,9 @@ a.links:hover {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-    top: 310px;
+    top: 320px;
 }
 #newInvoice img {
-	width: 120px;
+	width: 160px;
 	cursor: pointer;
 }

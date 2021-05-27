@@ -18,6 +18,7 @@ function dismissLoad() {
 } 
 function showNewInvoice() {
     document.getElementById('newInvoice').style.display = "block";
+    document.getElementById('preview').style.display = "none";
 }
 function hiddenNewInvoice() {
     document.getElementById('newInvoice').style.display = "none";
