@@ -62,7 +62,7 @@
             let scanner = new Instascan.Scanner(
                 {
                     video: document.getElementById('preview'),
-                    mirror: true,
+                    mirror: false,
                 }
             );
             scanner.addListener('scan', function (content) {
@@ -81,7 +81,15 @@
                         }
                     }
 
-                    if (!selectedCamera) selectedCamera = cameras[0];
+                    if (!selectedCamera) {
+                        selectedCamera = cameras[0];
+                        let scanner = new Instascan.Scanner(
+                            {
+                                video: document.getElementById('preview'),
+                                mirror: true,
+                            }
+                        );
+                    }
                 }
 
                 if (selectedCamera) {
@@ -91,13 +99,6 @@
                     console.error("Não existe câmera no dispositivo!");
                     dismissLoad();
                 }
-                // if (cameras.length > 0) {
-                //     scanner.start(cameras[0]);
-                //     dismissLoad();
-                // } else {
-                //     console.error("Não existe câmera no dispositivo!");
-                //     dismissLoad();
-                // }
             });
 
             function startVideo() {
