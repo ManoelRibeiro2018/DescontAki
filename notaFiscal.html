@@ -62,12 +62,7 @@
             let scanner = new Instascan.Scanner(
                 {
                     video: document.getElementById('preview'),
-                    continuous: true,
-                    mirror: false,
-                    captureImage: false,
-                    backgroundScan: true,
-                    refractoryPeriod: 1000,
-                    scanPeriod: 1
+                    mirror: true,
                 }
             );
             scanner.addListener('scan', function (content) {
