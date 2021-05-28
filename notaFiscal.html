@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <link href="./style/main.css" rel="stylesheet">
     <link href="./style/menu.css" rel="stylesheet">
@@ -15,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <title>Leitor NF</title>
 </head>
 
@@ -51,7 +53,7 @@
 
     <section id="centro">
         <h1>Leitor de Nota Fiscal </h1>
-        <video id="preview"></video>
+        <video playsinline  id="preview"></video>
 
         <div id="newInvoice" onclick="startVideo()">
             <img class="icones" src="./img/imgCode.png" alt="ícone QrCode">
