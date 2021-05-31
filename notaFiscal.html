@@ -75,30 +75,36 @@
             Instascan.Camera.getCameras().then(cameras => {
                 let selectedCamera;
 
-                // Tratamento para pegar a camera traseira do smartphone
-                if (cameras.length > 0) {
-                    for (let c = 0; c < cameras.length; c++) {
-                        if ((cameras[c].name.indexOf('back') != -1)
-                            || cameras[c].name === 'Câmera de Trás') {
-                            selectedCamera = cameras[c];
-                        }
-                    }
-
-                    if (!selectedCamera) {
-                        selectedCamera = cameras[0];
-                        let scanner = new Instascan.Scanner(
-                            {
-                                video: document.getElementById('preview'),
-                                mirror: true,
-                            }
-                        );
-                    }
-                }
-
-                if (selectedCamera) {
-                    scanner.start(selectedCamera);
-                    dismissLoad();
+                if (cameras.length > 1) {
+                    scanner.start(cameras[1]);
+                    selectedCamera = cameras[1];
                 } else {
+                    scanner.start(cameras[0])
+                    selectedCamera = cameras[0];
+                }
+                // if (cameras.length > 0) {
+                // for (let c = 0; c < cameras.length; c++) {
+                //     if (cameras[c].name.indexOf('back') != -1) {
+                //         selectedCamera = cameras[c];
+                //     }
+                // }
+
+                if (selectedCamera == cameras[0]) {
+                    // selectedCamera = cameras[0];
+                    dismissLoad();
+                    let scanner = new Instascan.Scanner(
+                        {
+                            video: document.getElementById('preview'),
+                            mirror: true,
+                        }
+                    );
+                }
+                // }
+
+                // if (selectedCamera) {
+                //     scanner.start(selectedCamera);
+                //     dismissLoad();
+                else {
                     console.error("Não existe câmera no dispositivo!");
                     dismissLoad();
                 }
