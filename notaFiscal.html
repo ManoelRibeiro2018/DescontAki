@@ -79,9 +79,10 @@
                 alert(cameras.length)
                 if (cameras.length > 0) {
                     for (let c = 0; c < cameras.length; c++) {
-                        alert(cameras[c].name)
-                        if (cameras[c].name.indexOf('back') != -1) {
-                            alert(cameras[c].name)
+                        if (cameras[c].name.indexOf('back') != -1 ||
+                            cameras[c].name.indexOf('Câmera de Trás') != -1 ||
+                            cameras[c].name.indexOf('Rear Camera') != -1) {
+                            alert(cameras[c].name, 'deu certo')
                             selectedCamera = cameras[c];
                         }
                     }
