@@ -16,7 +16,7 @@ cadastrar.addEventListener('click', () => {
             senha: senha
         };
     
-           await fetch("http://pblelcoma-final.herokuapp.com/usuarios",
+            fetch("http://pblelcoma-final.herokuapp.com/usuarios",
                 {
                     method: 'post',
                     mode: 'cors',
