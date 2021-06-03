@@ -174,7 +174,7 @@ img.icones {
 	transition: 400ms;
 }
 
-#iconeCupons:hover  {
+#iconeCupons:hover {
 	background-color: rgba(255, 255, 255, 0.20);
 	/* box-shadow: 10px 15px rgb(190, 171, 135); */
 	transition: 400ms;
@@ -292,4 +292,3 @@ a:hover {
 		margin-bottom: 2rem;
 	}
 }
-
