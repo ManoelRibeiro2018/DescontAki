@@ -1,7 +1,7 @@
 
 
- var elemtent_pai_inst = document.getElementById("inst");
- var divCupomInst = "";
+var elemtent_pai_inst = document.getElementById("inst");
+var divCupomInst = "";
 
 // Trazendo informação das categorias
 /*            
@@ -41,59 +41,57 @@
             this.Cupons(select);
         }
 
-  */      
+  */
 // Tazendo informações do cupom /cupons/categoria?idCategoria=1&idUsuario=455
 
 var codigoUsuairo = localStorage.getItem("CodSession");
 
-    fetch(`http://pblelcoma-final.herokuapp.com/cupons/usuario/${codigoUsuairo}`,
+fetch(`http://pblelcoma-final.herokuapp.com/cupons/usuario/${codigoUsuairo}`,
     {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',
         credentials: 'same-origin',
         redirect: 'follow',
-        referrerPolicy: 'no-referrer'            
+        referrerPolicy: 'no-referrer'
     })
     .then(response => {
-        if (!response.ok)
-        {
-            throw Error(response.statusText); 
+        if (!response.ok) {
+            throw Error(response.statusText);
         }
 
-        response.json().then(function(result){
-            if(result.length == 0){
-                
-                    h2 = document.createElement("h2")
-                    elemtent_pai_inst.appendChild(h2)
-                    h2.textContent = "Nenhum Cupom encontrado!!!"
+        response.json().then(function (result) {
+            if (result.length == 0) {
+
+                h2 = document.createElement("h2")
+                elemtent_pai_inst.appendChild(h2)
+                h2.textContent = "Nenhum Cupom encontrado!!!"
             }
-            else{
-                    for (let index = 0; index < result.length; index++) 
-                    {
-                        console.log(result);
-                        divCupomInst = document.createElement("div");
-                        elemtent_pai_inst.appendChild(divCupomInst);
-                        divCupomInst.className = "cupomInst";
-                        var h2 = document.createElement("h4");
-                        var p =  document.createElement("p");
-                        divCupomInst.appendChild(h2);
-                        divCupomInst.appendChild(p);
-                        h2.textContent = result[index].nomeLoja;                  
-                        p.textContent = result[index].titulo +" - " + result[index].descricao + ", no valor de: "+ result[index].valor +"%";             
-                        console.log(divCupomInst.className.length <= 0 ); 
-                        h2.className = "Pcupom";
-                        p.className = "H2cupom"; 
-                        
-                    }   
-                }        
+            else {
+                for (let index = 0; index < result.length; index++) {
+                    console.log(result);
+                    divCupomInst = document.createElement("div");
+                    elemtent_pai_inst.appendChild(divCupomInst);
+                    divCupomInst.className = "cupomInst";
+                    var h2 = document.createElement("h4");
+                    var p = document.createElement("p");
+                    divCupomInst.appendChild(h2);
+                    divCupomInst.appendChild(p);
+                    h2.textContent = result[index].nomeLoja;
+                    p.textContent = result[index].titulo + " - " + result[index].descricao + ", no valor de: " + result[index].valor + "%";
+                    console.log(divCupomInst.className.length <= 0);
+                    h2.className = "Pcupom";
+                    p.className = "H2cupom";
+
+                }
+            }
         })
 
-    }).catch(function(error){
+    }).catch(function (error) {
         console.log(error);
-        h1 = document.createElement("h1")
-        elemtent_pai_inst.appendChild(h1)
-        h1.textContent = "Nenhum Cupom encontrado!!!"
+        h2 = document.createElement("h2")
+        elemtent_pai_inst.appendChild(h2)
+        h2.textContent = "Nenhum Cupom encontrado!!!"
     })
 
 
@@ -109,4 +107,26 @@ function limparCards(){
 
 }
 */
-        
+
+window.onload = initPage;
+
+function initPage() {
+    calculateGoal();
+}
+
+function calculateGoal() {
+    let activateCoupon = true;
+    const button = document.querySelector('button');
+    button.disabled = activateCoupon;
+    let totalGoal = '500,00';
+    const totalValueRegistered = '350,00';
+
+    if (totalValueRegistered >= totalGoal) {
+        activateCoupon = false;
+        button.disabled = activateCoupon;
+    }
+
+    let result = (parseFloat(totalValueRegistered) * 100) / parseFloat(totalGoal);
+
+    document.getElementsByClassName('progress-bar').item(0).setAttribute('style', 'width:' + result + '%');
+}

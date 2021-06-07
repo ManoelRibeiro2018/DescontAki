@@ -86,27 +86,6 @@ function salvarEmail(){
 }
 
 
-function inciaModal(modalID) {
 
-        const modal = document.getElementById(modalID);
-        if (modal) {
-
-            modal.classList.add('mostrar');
-
-            modal.addEventListener('click', (e) => {
-
-                if (e.target.id == modalID) {
-                    modal.classList.remove('mostrar');
-                }
-            })
-        }
-    }
-
-
-
-const ativaModal = document.querySelector('#ativaModal');
-ativaModal.addEventListener('click', (e) => {
-    inciaModal('modal-ativar');
-})
 
 

@@ -8,6 +8,7 @@
            // window.open(content, "_blank");
 
                 InserindoNota(content);
+                console.log(content)
 
         });
         Instascan.Camera.getCameras().then(cameras => 
@@ -47,10 +48,9 @@
 
                 .then(function (res)
                 { 
-                    
-                                })
+                    console.log(funcionou)
+                })
                 .catch(function(error){
-
-
+                    console.log(error);
                 }) 
         }
