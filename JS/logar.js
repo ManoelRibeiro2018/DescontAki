@@ -38,7 +38,7 @@ logar.addEventListener('click', () => {
     }
 
     //fetch pegando os valores do banco
-    fetch(`http://pblelcoma-final.herokuapp.com/usuarios/cpf/${cpf}`,
+    fetch(`https://pblelcoma-final.herokuapp.com/usuarios/cpf/${cpf}`,
         {
             method: 'GET',
             mode: 'cors',
