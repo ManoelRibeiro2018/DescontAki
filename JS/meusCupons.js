@@ -107,7 +107,6 @@ function limparCards(){
 
 }
 */
-
 window.onload = initPage;
 
 function initPage() {
