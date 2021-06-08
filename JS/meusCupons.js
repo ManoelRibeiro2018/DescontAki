@@ -44,7 +44,7 @@ var divCupomInst = "";
 
 var codigoUsuairo = localStorage.getItem("CodSession");
 
-fetch(`http://pblelcoma-final.herokuapp.com/cupons/usuario/${codigoUsuairo}`, {
+fetch(`https://pblelcoma-final.herokuapp.com/cupons/usuario/${codigoUsuairo}`, {
   method: "GET",
   mode: "cors",
   cache: "no-cache",
@@ -115,7 +115,7 @@ function calculateGoal() {
   const idUsuario = 583;
   const dataCadastroCupom = "2021-06-0401:00:00";
   fetch(
-    `http://pblelcoma-final.herokuapp.com/notafiscal/totalnotas/${idUsuario}/${dataCadastroCupom}`,
+    `https://pblelcoma-final.herokuapp.com/notafiscal/totalnotas/${idUsuario}/${dataCadastroCupom}`,
     {
       method: "GET",
       mode: "cors",
