@@ -172,20 +172,4 @@ function calculateGoal() {
         .catch((err) => {
             console.error("Failed retrieving information", err);
         });
-    /*let activateCoupon = true;
-    const button = document.querySelector("button");
-    button.disabled = activateCoupon;
-    let totalGoal = "500,00";
-  
-    if (totalValueRegistered >= totalGoal) {
-      activateCoupon = false;
-      button.disabled = activateCoupon;
-    }
-  
-    let result = (parseFloat(totalValueRegistered) * 100) / parseFloat(totalGoal);
-  
-    document
-      .getElementsByClassName("progress-bar")
-      .item(0)
-      .setAttribute("style", "width:" + result + "%");*/
 }
