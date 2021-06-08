@@ -1,5 +1,3 @@
-
-
 var elemtent_pai_inst = document.getElementById("inst");
 var divCupomInst = "";
 
@@ -46,52 +44,53 @@ var divCupomInst = "";
 
 var codigoUsuairo = localStorage.getItem("CodSession");
 
-fetch(`http://pblelcoma-final.herokuapp.com/cupons/usuario/${codigoUsuairo}`,
-    {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer'
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw Error(response.statusText);
+fetch(`http://pblelcoma-final.herokuapp.com/cupons/usuario/${codigoUsuairo}`, {
+  method: "GET",
+  mode: "cors",
+  cache: "no-cache",
+  credentials: "same-origin",
+  redirect: "follow",
+  referrerPolicy: "no-referrer",
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+
+    response.json().then(function (result) {
+      if (result.length == 0) {
+        h2 = document.createElement("h2");
+        elemtent_pai_inst.appendChild(h2);
+        h2.textContent = "Nenhum Cupom encontrado!!!";
+      } else {
+        for (let index = 0; index < result.length; index++) {
+          divCupomInst = document.createElement("div");
+          elemtent_pai_inst.appendChild(divCupomInst);
+          divCupomInst.className = "cupomInst";
+          var h2 = document.createElement("h4");
+          var p = document.createElement("p");
+          divCupomInst.appendChild(h2);
+          divCupomInst.appendChild(p);
+          h2.textContent = result[index].nomeLoja;
+          p.textContent =
+            result[index].titulo +
+            " - " +
+            result[index].descricao +
+            ", no valor de: " +
+            result[index].valor +
+            "%";
+          h2.className = "Pcupom";
+          p.className = "H2cupom";
         }
-
-        response.json().then(function (result) {
-            if (result.length == 0) {
-
-                h2 = document.createElement("h2")
-                elemtent_pai_inst.appendChild(h2)
-                h2.textContent = "Nenhum Cupom encontrado!!!"
-            }
-            else {
-                for (let index = 0; index < result.length; index++) {
-                    divCupomInst = document.createElement("div");
-                    elemtent_pai_inst.appendChild(divCupomInst);
-                    divCupomInst.className = "cupomInst";
-                    var h2 = document.createElement("h4");
-                    var p = document.createElement("p");
-                    divCupomInst.appendChild(h2);
-                    divCupomInst.appendChild(p);
-                    h2.textContent = result[index].nomeLoja;
-                    p.textContent = result[index].titulo + " - " + result[index].descricao + ", no valor de: " + result[index].valor + "%";
-                    h2.className = "Pcupom";
-                    p.className = "H2cupom";
-
-                }
-            }
-        })
-
-    }).catch(function (error) {
-        console.log(error);
-        h2 = document.createElement("h2")
-        elemtent_pai_inst.appendChild(h2)
-        h2.textContent = "Nenhum Cupom encontrado!!!"
-    })
-
+      }
+    });
+  })
+  .catch(function (error) {
+    console.log(error);
+    h2 = document.createElement("h2");
+    elemtent_pai_inst.appendChild(h2);
+    h2.textContent = "Nenhum Cupom encontrado!!!";
+  });
 
 //[MANOEL] função para verificar se os cards exitem, e limpar
 /*
@@ -108,53 +107,68 @@ function limparCards(){
 window.onload = initPage;
 
 function initPage() {
-    calculateGoal();
+  calculateGoal();
 }
 
 function calculateGoal() {
-    fetch(`http://pblelcoma-final.herokuapp.com/notafiscal/totalnotas`,
-        {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
-            body: {
-                "dataCadastro": "2021-06-06 23:00:03",
-                "usuario": {
-                    "id": 583
-                }
-            }
-        })
-        .then(function (res) {
-            if (!res.ok) {
-                throw Error(res.statusText);
-            }
-            console.log(res);
+  let totalValueRegistered = 0;
+  const idUsuario = 583;
+  const dataCadastroCupom = "2021-06-0401:00:00";
+  fetch(
+    `http://pblelcoma-final.herokuapp.com/notafiscal/totalnotas/${idUsuario}/${dataCadastroCupom}`,
+    {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+    }
+  )
+    .then((res) => res.json())
+    .then((result) => {
+      result.forEach((element) => {
+        totalValueRegistered = totalValueRegistered + element.valor;
+      });
+      return totalValueRegistered;
+    })
+    .then(() => {
+      document.getElementById("totalCadastrado").innerHTML = totalValueRegistered;
+      let activateCoupon = true;
+      const button = document.querySelector("button");
+      button.disabled = true;
+      let totalGoal = "500.00";
 
-            return res;
-
-        })
-
-        .then(function (res) {
-            console.log(res);
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-    let activateCoupon = true;
-    const button = document.querySelector('button');
-    button.disabled = activateCoupon;
-    let totalGoal = '500,00';
-    const totalValueRegistered = '350,00';
-
-    if (totalValueRegistered >= totalGoal) {
+      if (totalValueRegistered >= totalGoal) {
         activateCoupon = false;
         button.disabled = activateCoupon;
-    }
+      }
 
-    let result = (parseFloat(totalValueRegistered) * 100) / parseFloat(totalGoal);
+      let result =
+        (parseFloat(totalValueRegistered) * 100) / parseFloat(totalGoal);
 
-    document.getElementsByClassName('progress-bar').item(0).setAttribute('style', 'width:' + result + '%');
+      document
+        .getElementsByClassName("progress-bar")
+        .item(0)
+        .setAttribute("style", "width:" + result + "%");
+    })
+    .catch((err) => {
+      console.error("Failed retrieving information", err);
+    });
+  /*let activateCoupon = true;
+  const button = document.querySelector("button");
+  button.disabled = activateCoupon;
+  let totalGoal = "500,00";
+
+  if (totalValueRegistered >= totalGoal) {
+    activateCoupon = false;
+    button.disabled = activateCoupon;
+  }
+
+  let result = (parseFloat(totalValueRegistered) * 100) / parseFloat(totalGoal);
+
+  document
+    .getElementsByClassName("progress-bar")
+    .item(0)
+    .setAttribute("style", "width:" + result + "%");*/
 }
