@@ -15,7 +15,7 @@ h1#title {
 }
 
 ul {
-    top: 100px;
+	top: 100px;
 }
 
 /* h1:after {
@@ -166,9 +166,8 @@ small {
 .separacao {
 	margin: 2rem 0;
 }
-.itensMenu  {
+.itensMenu {
 	text-decoration: none !important;
-
 }
 a.links {
 	color: var(--color-grey-darker);
@@ -199,7 +198,7 @@ a.links:hover {
 }
 
 .couponsMissions button {
-	width: 50px;
+	width: 60px;
 	height: 30px;
 	border-radius: 10px;
 	margin: 0 0 0 70px;
@@ -210,6 +209,7 @@ a.links:hover {
 	background-color: transparent;
 	border: 1px solid;
 	color: var(--color-grey-dark);
+	width: 60px;
 }
 #goalValue {
 	margin: 0 0 0 212px;
@@ -220,9 +220,9 @@ a.links:hover {
 	margin: 0 100px 0 0;
 }
 .progress {
-	width: 270px;
+	width: 280px;
 	margin-bottom: 4px !important;
-	margin: 10px 0 0px 12px;
+	margin: 10px 0 0px 10px;
 }
 .contentCouponMissios {
 	border: 2px solid var(--color-orange);

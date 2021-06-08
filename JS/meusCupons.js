@@ -45,52 +45,52 @@ var divCupomInst = "";
 var codigoUsuairo = localStorage.getItem("CodSession");
 
 fetch(`https://pblelcoma-final.herokuapp.com/cupons/usuario/${codigoUsuairo}`, {
-  method: "GET",
-  mode: "cors",
-  cache: "no-cache",
-  credentials: "same-origin",
-  redirect: "follow",
-  referrerPolicy: "no-referrer",
+    method: "GET",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
 })
-  .then((response) => {
-    if (!response.ok) {
-      throw Error(response.statusText);
-    }
+    .then((response) => {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
 
-    response.json().then(function (result) {
-      if (result.length == 0) {
+        response.json().then(function (result) {
+            if (result.length == 0) {
+                h2 = document.createElement("h2");
+                elemtent_pai_inst.appendChild(h2);
+                h2.textContent = "Nenhum Cupom encontrado!!!";
+            } else {
+                for (let index = 0; index < result.length; index++) {
+                    divCupomInst = document.createElement("div");
+                    elemtent_pai_inst.appendChild(divCupomInst);
+                    divCupomInst.className = "cupomInst";
+                    var h2 = document.createElement("h4");
+                    var p = document.createElement("p");
+                    divCupomInst.appendChild(h2);
+                    divCupomInst.appendChild(p);
+                    h2.textContent = result[index].nomeLoja;
+                    p.textContent =
+                        result[index].titulo +
+                        " - " +
+                        result[index].descricao +
+                        ", no valor de: " +
+                        result[index].valor +
+                        "%";
+                    h2.className = "Pcupom";
+                    p.className = "H2cupom";
+                }
+            }
+        });
+    })
+    .catch(function (error) {
+        console.log(error);
         h2 = document.createElement("h2");
         elemtent_pai_inst.appendChild(h2);
         h2.textContent = "Nenhum Cupom encontrado!!!";
-      } else {
-        for (let index = 0; index < result.length; index++) {
-          divCupomInst = document.createElement("div");
-          elemtent_pai_inst.appendChild(divCupomInst);
-          divCupomInst.className = "cupomInst";
-          var h2 = document.createElement("h4");
-          var p = document.createElement("p");
-          divCupomInst.appendChild(h2);
-          divCupomInst.appendChild(p);
-          h2.textContent = result[index].nomeLoja;
-          p.textContent =
-            result[index].titulo +
-            " - " +
-            result[index].descricao +
-            ", no valor de: " +
-            result[index].valor +
-            "%";
-          h2.className = "Pcupom";
-          p.className = "H2cupom";
-        }
-      }
     });
-  })
-  .catch(function (error) {
-    console.log(error);
-    h2 = document.createElement("h2");
-    elemtent_pai_inst.appendChild(h2);
-    h2.textContent = "Nenhum Cupom encontrado!!!";
-  });
 
 //[MANOEL] função para verificar se os cards exitem, e limpar
 /*
@@ -107,68 +107,85 @@ function limparCards(){
 window.onload = initPage;
 
 function initPage() {
-  calculateGoal();
+    calculateGoal();
+}
+
+function generateCode() {
+    const button = document.querySelector("button");
+    const codCoupon = 'CYD-6458';
+    document.getElementById("generateCode").innerHTML = 'Ativado';
+    document.getElementById("showCode").innerHTML = `Utilize o código: ${codCoupon}`;
+    button.disabled = true;
+    localStorage.setItem('activeMission', true);
 }
 
 function calculateGoal() {
-  let totalValueRegistered = 0;
-  const idUsuario = 583;
-  const dataCadastroCupom = "2021-06-0401:00:00";
-  fetch(
-    `https://pblelcoma-final.herokuapp.com/notafiscal/totalnotas/${idUsuario}/${dataCadastroCupom}`,
-    {
-      method: "GET",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-    }
-  )
-    .then((res) => res.json())
-    .then((result) => {
-      result.forEach((element) => {
-        totalValueRegistered = totalValueRegistered + element.valor;
-      });
-      return totalValueRegistered;
-    })
-    .then(() => {
-      document.getElementById("totalCadastrado").innerHTML = totalValueRegistered;
-      let activateCoupon = true;
-      const button = document.querySelector("button");
-      button.disabled = true;
-      let totalGoal = "500.00";
+    let totalValueRegistered = 0;
+    const idUsuario = 583;
+    const dataCadastroCupom = "2021-06-0401:00:00";
+    fetch(
+        `https://pblelcoma-final.herokuapp.com/notafiscal/totalnotas/${idUsuario}/${dataCadastroCupom}`,
+        {
+            method: "GET",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+        }
+    )
+        .then((res) => res.json())
+        .then((result) => {
+            result.forEach((element) => {
+                totalValueRegistered = totalValueRegistered + element.valor;
+            });
+            return totalValueRegistered;
+        })
+        .then(() => {
+            document.getElementById("totalCadastrado").innerHTML = `R$${totalValueRegistered}`;
+            let activateCoupon = true;
+            const button = document.querySelector("button");
+            if (localStorage.getItem('activeMission')) {
+                generateCode();
+            } else {
+                button.disabled = false;
+            }
+            const totalGoal = "5000.00";
+            document.getElementById("goalValue").innerHTML = `R$${totalGoal}`;
 
-      if (totalValueRegistered >= totalGoal) {
-        activateCoupon = false;
-        button.disabled = activateCoupon;
-      }
+            if (totalValueRegistered >= totalGoal && !localStorage.getItem('activeMission')) {
+                activateCoupon = false;
+                button.disabled = activateCoupon;
+            } else if (totalValueRegistered < totalGoal) {
+                localStorage.removeItem('activeMission');
+                button.disabled = activateCoupon;
+            }
 
-      let result =
-        (parseFloat(totalValueRegistered) * 100) / parseFloat(totalGoal);
+            let result =
+                (parseFloat(totalValueRegistered) * 100) / parseFloat(totalGoal);
 
-      document
-        .getElementsByClassName("progress-bar")
-        .item(0)
-        .setAttribute("style", "width:" + result + "%");
-    })
-    .catch((err) => {
-      console.error("Failed retrieving information", err);
-    });
-  /*let activateCoupon = true;
-  const button = document.querySelector("button");
-  button.disabled = activateCoupon;
-  let totalGoal = "500,00";
-
-  if (totalValueRegistered >= totalGoal) {
-    activateCoupon = false;
+            document
+                .getElementsByClassName("progress-bar")
+                .item(0)
+                .setAttribute("style", "width:" + result + "%");
+        })
+        .catch((err) => {
+            console.error("Failed retrieving information", err);
+        });
+    /*let activateCoupon = true;
+    const button = document.querySelector("button");
     button.disabled = activateCoupon;
-  }
-
-  let result = (parseFloat(totalValueRegistered) * 100) / parseFloat(totalGoal);
-
-  document
-    .getElementsByClassName("progress-bar")
-    .item(0)
-    .setAttribute("style", "width:" + result + "%");*/
+    let totalGoal = "500,00";
+  
+    if (totalValueRegistered >= totalGoal) {
+      activateCoupon = false;
+      button.disabled = activateCoupon;
+    }
+  
+    let result = (parseFloat(totalValueRegistered) * 100) / parseFloat(totalGoal);
+  
+    document
+      .getElementsByClassName("progress-bar")
+      .item(0)
+      .setAttribute("style", "width:" + result + "%");*/
 }

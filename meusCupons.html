@@ -49,16 +49,17 @@
         <br>
         <div class="contentCouponMissios">
             <label>Estacionamento Grátis*</label>
-            <button>Ativar</button>
+            <button id="generateCode" onclick="generateCode()">Ativar</button>
             <br>
-            <label id="amount">Total Cadastrado: <strong id="totalCadastrado">R$350,00</strong></label>
+            <label id="amount">Total Cadastrado: <strong id="totalCadastrado"></strong></label>
             <div class="container">
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar">
                     </div>
                 </div>
             </div>
-            <strong id="goalValue">R$500,00</strong>
+            <strong id="goalValue"></strong>
+            <div id="showCode"></div>
         </div>
     </div>
     <hr>
