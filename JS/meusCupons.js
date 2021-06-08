@@ -69,7 +69,6 @@ fetch(`http://pblelcoma-final.herokuapp.com/cupons/usuario/${codigoUsuairo}`,
             }
             else {
                 for (let index = 0; index < result.length; index++) {
-                    console.log(result);
                     divCupomInst = document.createElement("div");
                     elemtent_pai_inst.appendChild(divCupomInst);
                     divCupomInst.className = "cupomInst";
@@ -79,7 +78,6 @@ fetch(`http://pblelcoma-final.herokuapp.com/cupons/usuario/${codigoUsuairo}`,
                     divCupomInst.appendChild(p);
                     h2.textContent = result[index].nomeLoja;
                     p.textContent = result[index].titulo + " - " + result[index].descricao + ", no valor de: " + result[index].valor + "%";
-                    console.log(divCupomInst.className.length <= 0);
                     h2.className = "Pcupom";
                     p.className = "H2cupom";
 
@@ -115,6 +113,37 @@ function initPage() {
 }
 
 function calculateGoal() {
+    fetch(`http://pblelcoma-final.herokuapp.com/notafiscal/totalnotas`,
+        {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer',
+            body: {
+                "dataCadastro": "2021-06-06 23:00:03",
+                "usuario": {
+                    "id": 583
+                }
+            }
+        })
+        .then(function (res) {
+            if (!res.ok) {
+                throw Error(res.statusText);
+            }
+            console.log(res);
+
+            return res;
+
+        })
+
+        .then(function (res) {
+            console.log(res);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
     let activateCoupon = true;
     const button = document.querySelector('button');
     button.disabled = activateCoupon;
