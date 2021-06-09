@@ -217,7 +217,9 @@ a.links:hover {
 }
 
 #amount {
-	margin: 0 100px 0 0;
+	margin: 0 0px 0 24px;
+    text-align: initial;
+    display: flex;
 }
 .progress {
 	width: 280px;

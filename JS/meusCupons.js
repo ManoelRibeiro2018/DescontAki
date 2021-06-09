@@ -108,6 +108,7 @@ window.onload = initPage;
 
 function initPage() {
     calculateGoal();
+    document.getElementById("loading").style.display = 'block';
 }
 
 function generateCode() {
@@ -141,7 +142,8 @@ function calculateGoal() {
             return totalValueRegistered;
         })
         .then(() => {
-            document.getElementById("totalCadastrado").innerHTML = `R$${totalValueRegistered}`;
+            document.getElementById("loading").style.display = 'none';
+            document.getElementById("totalCadastrado").innerHTML = ` R$${totalValueRegistered}`;
             let activateCoupon = true;
             const button = document.querySelector("button");
             if (localStorage.getItem('activeMission')) {
@@ -169,6 +171,7 @@ function calculateGoal() {
                 .setAttribute("style", "width:" + result + "%");
         })
         .catch((err) => {
+            document.getElementById("loading").style.display = 'none';
             console.error("Failed retrieving information", err);
         });
 }

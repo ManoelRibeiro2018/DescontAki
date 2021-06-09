@@ -3,13 +3,12 @@
 const logar = document.querySelector('#logar');
 logar.addEventListener('click', () => {   
 
+    document.getElementById("loading").style.display = 'block';
     var cpf = document.getElementById("CPF").value
     var senha = document.getElementById("senha").value 
     localStorage.setItem('cpf', cpf)
     cpf = cpf.replace("-","").replace(".","").replace(".","")
-
-
-     
+   
     const modal = document.getElementById('modal-ativar');    
 
     const validarConta = (data) =>  {
@@ -54,11 +53,13 @@ logar.addEventListener('click', () => {
             }
 
             response.json().then(data => validarConta(data))
+            document.getElementById("loading").style.display = 'none';
 
         }).catch(function(error){
 
             if (modal)
             { 
+                document.getElementById("loading").style.display = 'none';
                 document.getElementById("msgErro").innerHTML = "CPF ou senha inválidos, por favor tente novamente!";
                    
                 console.log(document.getElementById("msgErro").innerHtml)

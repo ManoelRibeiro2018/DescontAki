@@ -9,12 +9,15 @@
     <link href="./style/loginEcadastro.css" rel="stylesheet">
     <link rel="icon" href="img/Icon.png" type="image/x-icon" />
     <link rel="stylesheet" href="./style/Modal.css">
+    <link href="./style/global.css" rel="stylesheet">
 
     <title>Cadastro</title>
 </head>
 
 <body>
-
+    <div id="loading">
+        <img id="loading-image" src="img/load.gif" alt="Loading..." />
+    </div>
     <div class="form">
         <div id="imgLogo">
             <img id="logo" src="img/logo.png" alt="Descontaki">
@@ -32,8 +35,8 @@
         <div id="divBtnLink">
             <a class="btnOrangeL" id="cadastrar" href="#">Salvar</a> <br>
         </div>
-           <!--Inicio do modal-->
-           <div id="modal-ativar" class="modal-container">
+        <!--Inicio do modal-->
+        <div id="modal-ativar" class="modal-container">
             <div class="modal">
                 <div class="modal-body">
                     <h3 id="msgErro" class="subtitulo"></h3>

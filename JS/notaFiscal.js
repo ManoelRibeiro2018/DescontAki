@@ -1,5 +1,11 @@
 let lojista = '';
 
+window.onload = initPage;
+
+function initPage() {
+    document.getElementById("loading").style.display = 'block';
+}
+
 function startToast() {
     Toastify({
         text: `Cupom ${lojista} cadastrado com sucesso!`,

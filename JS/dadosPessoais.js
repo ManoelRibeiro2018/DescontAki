@@ -3,6 +3,7 @@ let nome = document.getElementById("nome");
 let email = document.getElementById("email");
 let nascimento = document.getElementById("nascimento");
 let sexo = document.getElementsByName("sexo");
+document.getElementById("loading").style.display = 'block';
 
 let valores = {};
 const preencherCampos = () => {
@@ -43,8 +44,12 @@ const preencherCampos = () => {
       }
 
       response.json().then((data) => preencherComData(data));
+      document.getElementById("loading").style.display = 'none';
     })
-    .catch((e) => console.log("deu erro" + e.message));
+    .catch((e) => {
+      console.log("deu erro" + e.message);
+      document.getElementById("loading").style.display = 'none';
+    });
 };
 
 function salvarDados() {
