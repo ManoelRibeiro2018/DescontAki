@@ -26,6 +26,7 @@ function hiddenNewInvoice() {
     document.getElementById('preview').style.display = "block";
 }
 function InserindoNota(content) {
+    document.getElementById("loading").style.display = 'block';
     var codigoUsuairo = localStorage.getItem("CodSession")
     var valores = {
         url: content,
@@ -51,6 +52,10 @@ function InserindoNota(content) {
         .then((res) => res.json())
         .then((result) => {
             lojista = result.nome;
+            if(result) {
+                startToast();
+                dismissLoad();
+            }
         }).catch(function (error) {
             console.error(error);
         })
