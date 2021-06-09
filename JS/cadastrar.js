@@ -4,68 +4,76 @@ const cadastrar = document.querySelector('#cadastrar');
 const modal = document.getElementById('modal-ativar');  
 
 cadastrar.addEventListener('click', () => {
-    let cpf = document.getElementById("CPF").value
-    var senha = document.getElementById("senha").value
-    let senhaConf = document.getElementById("confirmarSenha").value
+        let cpf = document.getElementById("CPF").value
+        var senha = document.getElementById("senha").value
+        let senhaConf = document.getElementById("confirmarSenha").value
 
-    if(senha == senhaConf){
-        localStorage.setItem('cpf', cpf)
-        cpf = cpf.replace("-","").replace(".","").replace(".","") 
-        var valores = {
-            cpf: cpf,
-            senha: senha
-        };
-    
-            fetch("http://pblelcoma-final.herokuapp.com/usuarios",
-                {
-                    method: 'post',
-                    mode: 'cors',
-                    cache: 'no-cache',
-                    credentials: 'same-origin',
-                    headers:{
-                        'Content-Type': 'application/json'
-                    },
-                    redirect: 'follow',
-                    referrerPolicy: 'no-referrer',
-                    body: JSON.stringify(valores)     
-                            
-                })
-                
-                .then(function (res) {
-                    if(!res.ok){
-                        throw Error(res.statusText);
-                    }
-                    return res;})
+        if(cpf == "" || senha == "" || senhaConf == ""){
 
-                .then(function (res)
-                { 
-                    res.json().then(data => localStorage.setItem("CodSession", data) );
+            texto ="É necessário informar todos os dados"; 
+            MostrarModal(texto);
+        }
+
+
+       else if(senha == senhaConf){
+            localStorage.setItem('cpf', cpf)
+            cpf = cpf.replace("-","").replace(".","").replace(".","") 
+            var valores = {
+                cpf: cpf,
+                senha: senha
+            };
+        
+                fetch("https://pblelcoma-final.herokuapp.com/usuarios",
+                    {
+                        method: 'post',
+                        mode: 'cors',
+                        cache: 'no-cache',
+                        credentials: 'same-origin',
+                        headers:{
+                            'Content-Type': 'application/json'
+                        },
+                        redirect: 'follow',
+                        referrerPolicy: 'no-referrer',
+                        body: JSON.stringify(valores)     
+                                
+                    })
                     
-                    window.location.href = "home.html"
-                })
-                .catch(function(error){
+                    .then(function (res) {
+                        if(!res.ok){
+                            throw Error(res.statusText);
+                        }
+                        return res;})
 
-                    alert("Esse CPF já possui cadastro. Tente com um novo CPF ou entre com seu CPF e senha. ")
+                    .then(function (res)
+                    { 
+                        res.json().then(data => localStorage.setItem("CodSession", data) );                    
+                        window.location.href = "home.html"
+                    })
+                    .catch(function(error){
 
-                }) 
+                        texto = "OPSS.. Esse CPF já possui cadastro.";
+                        MostrarModal(texto);
+                
+                    }) 
 
-    }else if (modal)
-            {
-
-                document.getElementById("msgErro").innerHTML = "Os dados informados estão incorretos!"
-                console.log(document.getElementById("msgErro").innerHtml)
-                modal.classList.add('mostrar');
-
-                modal.addEventListener('click', (e) => {
-
-                    if (e.target.id == 'modal-ativar') {
-                        modal.classList.remove('mostrar');
-                      
-                    }         
-                })
-              }
-    
-            
+        }else{
+                    texto = "OPSS... senhas distintas"
+                    MostrarModal(texto);
+                   
+        }
     
     }
 )
+
+function MostrarModal(texto){
+    document.getElementById("msgErro").innerHTML = texto
+    modal.classList.add('mostrar');
+
+    modal.addEventListener('click', (e) => {
+
+        if (e.target.id == 'modal-ativar') {
+            modal.classList.remove('mostrar');
+        
+        }         
+    })
+}
