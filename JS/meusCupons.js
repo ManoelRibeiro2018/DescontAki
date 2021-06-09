@@ -121,10 +121,9 @@ function generateCode() {
 
 function calculateGoal() {
     let totalValueRegistered = 0;
-    const idUsuario = 583;
     const dataCadastroCupom = "2021-06-0401:00:00";
     fetch(
-        `https://pblelcoma-final.herokuapp.com/notafiscal/totalnotas/${idUsuario}/${dataCadastroCupom}`,
+        `https://pblelcoma-final.herokuapp.com/notafiscal/totalnotas/${codigoUsuairo}/${dataCadastroCupom}`,
         {
             method: "GET",
             mode: "cors",
