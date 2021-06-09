@@ -1,4 +1,5 @@
 let lojista = '';
+let msgError = '';
 
 window.onload = initPage;
 
@@ -13,6 +14,18 @@ function startToast() {
         gravity: "top",
         position: "right",
         backgroundColor: "rgb(10 187 10)",
+        stopOnFocus: true,
+        close: true,
+        className: "showToast"
+    }).showToast();
+}
+function startToastError() {
+    Toastify({
+        text: `${msgError}`,
+        duration: 300000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "red",
         stopOnFocus: true,
         close: true,
         className: "showToast"
@@ -57,9 +70,13 @@ function InserindoNota(content) {
 
         .then((res) => res.json())
         .then((result) => {
-            lojista = result.nome;
-            if(result) {
+            if (result.nome) {
+                lojista = result.nome;
                 startToast();
+                dismissLoad();
+            } else {
+                msgError = result.msg;
+                startToastError();
                 dismissLoad();
             }
         }).catch(function (error) {
