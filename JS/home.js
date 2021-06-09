@@ -1,17 +1,52 @@
-let nome = localStorage.getItem('nome')
+let nome;
 let h1 = document.getElementsByTagName('h1')[0]
+let valores = {};
 
-function carregarPersonalizacoes(){
+const carregarPersonalizacoes = () => {
+
+    const salvarFetch = (data) =>{
+        valores = data;
+        console.log(valores);
+        nome = valores["nome"]
+        
+        imprimirNome()
+    }
+
+
+    fetch(
+    `https://pblelcoma-final.herokuapp.com/usuarios/${localStorage.getItem(
+      "CodSession"
+    )}`,
+    {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+    }
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+
+      response.json().then((data) => salvarFetch(data));
+    })
+    .catch((e) => console.log("deu erro" + e.message));
+};
     
-    imprimirNome()
+    
+    
     if(localStorage.getItem('fecharPersonalizar') == ''){
         personalizar.style.display = 'block'
     }  
-}
+
 
 function imprimirNome(){
+
     if(nome != '' && nome != null){  
-        h1.innerHTML = `Seja Bem-Vindo(a), <span>${nome}</span> !`
+        h1.innerHTML = `Seja Bem-Vindo(a), <span>${valores["nome"]}</span> !`
     }   
 }
 
@@ -27,7 +62,7 @@ function salvarNome(){
     let divRespNasc = document.getElementById('respostaNascimento')  
 
     if(nome.value !='' ){
-        localStorage.setItem('nome', nome.value)
+        valores["nome"] = nome.value;
         divRespNome.style.display = 'none'
         divRespNasc.style.display = 'block'
     } else {
@@ -41,7 +76,7 @@ function salvarNasc(){
     let divRespSexo = document.getElementById('respostaSexo')  
 
     if(nascimento.value !=''){
-        localStorage.setItem('nascimento', nascimento.value)
+        valores["nascimento"] = nascimento.value;
         divRespNasc.style.display = 'none'
         divRespSexo.style.display = 'block'
     } else {
@@ -53,7 +88,7 @@ function salvarSexoMasc(){
     let divRespSexo = document.getElementById('respostaSexo')  
     let divRespEmail = document.getElementById('respostaEmail')
 
-    localStorage.setItem('sexo','M')
+    valores["sexo"] = "m";
     divRespSexo.style.display = 'none'
     divRespEmail.style.display ='block'  
     
@@ -63,7 +98,7 @@ function salvarSexoFem(){
     let divRespSexo = document.getElementById('respostaSexo') 
     let divRespEmail = document.getElementById('respostaEmail')
 
-    localStorage.setItem('sexo','F')
+    valores["sexo"] = "f";
     divRespSexo.style.display = 'none'
     divRespEmail.style.display ='block'
 }
@@ -75,7 +110,7 @@ function salvarEmail(){
     let cabecalho =document.getElementById('cabecalhoPersonalizar')
 
     if(email.value !=''){
-        localStorage.setItem('email', email.value)
+        valores["email"] = email.value;
         divRespEmail.style.display ='none'
         cabecalho.style.display = 'none'
         divMsgFinal.style.display ='block'
@@ -83,9 +118,62 @@ function salvarEmail(){
     } else {
         alert('Os dados precisam ser preenchidos para serem salvos.')
     }
+    console.log(valores);
+    
+    salvarDados();
+    
+    carregarPersonalizacoes();
+    
+}
+
+const salvarDados = () =>{
+    fetch(`https://pblelcoma-final.herokuapp.com/usuarios/${localStorage.getItem(
+        "CodSession"
+      )}`, {
+    method: "put",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify(valores),
+  })
+    .then(function (res) {
+      if (!res.ok) {
+        throw Error(res.statusText);
+      }
+      return res;
+    })
+
+    .then(function (res) {
+      console.log(res);
+      localStorage.setItem('fecharPersonalizar', 1);
+    })
+    .catch(function (error) {
+      alert(error);
+    });
+
+  alert("Suas alterações foram realizadas com sucesso!");
 }
 
 
 
+
+
+function inciaModal(modalID) {
+
+        const modal = document.getElementById(modalID);
+        if (modal) {
+
+            modal.classList.add('mostrar');
+
+            modal.addEventListener('click', (e) => {
+
+                if (e.target.id == modalID) {
+                    modal.classList.remove('mostrar');
+                }
+            })
+        }
+    }
 
 

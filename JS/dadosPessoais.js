@@ -25,7 +25,7 @@ const preencherCampos = () => {
   };
 
   fetch(
-    `http://pblelcoma-final.herokuapp.com/usuarios/${localStorage.getItem(
+    `https://pblelcoma-final.herokuapp.com/usuarios/${localStorage.getItem(
       "CodSession"
     )}`,
     {
@@ -59,14 +59,9 @@ function salvarDados() {
     valores["sexo"] = "f";
   }
 
-  /*
-    localStorage.setItem('nome', nome.value)
-    localStorage.setItem('email', email.value)
-    localStorage.setItem('nascimento', nascimento.value)
-    localStorage.setItem('fecharPersonalizar', 1)
-    */
 
-  fetch(`https://pblelcoma-final.herokuapp.com/usuarios/546`, {
+
+  fetch(`https://pblelcoma-final.herokuapp.com/usuarios/${localStorage.getItem("CodSession")}`, {
     method: "put",
     mode: "cors",
     headers: {

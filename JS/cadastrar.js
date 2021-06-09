@@ -7,6 +7,7 @@ cadastrar.addEventListener('click', () => {
         let cpf = document.getElementById("CPF").value
         var senha = document.getElementById("senha").value
         let senhaConf = document.getElementById("confirmarSenha").value
+        localStorage.setItem('fecharPersonalizar', '');
 
         if(cpf == "" || senha == "" || senhaConf == ""){
 
