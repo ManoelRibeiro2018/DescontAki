@@ -82,7 +82,7 @@ a.links:hover {
 	width: 320px;
 	height: 74px;
 	border-radius: 6px !important;
-	padding: 22px 0 0 20px !important;
+	padding: 12px 0 0 20px !important;
 }
 .toast-close {
 	opacity: 70% !important;
@@ -90,7 +90,7 @@ a.links:hover {
 	color: #fff;
 	display: flex;
 	justify-content: flex-end;
-	margin: -40px 14px 0px 0px;
+	margin: -52px 14px 0px 0px;
 }
 #newInvoice {
     display: none;

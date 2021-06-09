@@ -1,7 +1,7 @@
 function startToast() {
-    console.log('foi')
+    const lojista = 'Americanas';
     Toastify({
-        text: "Cupom cadastrado com sucesso!",
+        text: `Cupom ${lojista} cadastrado com sucesso!`,
         duration: 3000,
         gravity: "top", 
         position: "right", 

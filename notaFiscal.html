@@ -60,7 +60,7 @@
             <p class="txtIcones">Cadastrar nova <br /> Nota Fiscal </p>
         </div>
 
-        
+
         <script>
             let scanner = new Instascan.Scanner(
                 {
@@ -110,39 +110,31 @@
             }
 
 
-            function InserindoNota(content){
-            
-                    var valores = {
-                        url: content
-                    };
-                    fetch("http://pblelcoma-final.herokuapp.com/notafiscal",
-                        {
-                            method: 'post',
-                            mode: 'cors',
-                            cache: 'no-cache',
-                            credentials: 'same-origin',
-                            headers:{
-                                'Content-Type': 'application/json'
-                            },
-                            redirect: 'follow',
-                            referrerPolicy: 'no-referrer',
-                            body: JSON.stringify(valores)     
-                                    
-                        })
-                        
-                        .then(function (res) {
-                            if(!res.ok){
-                                throw Error(res.statusText);
-                            }
-                            return res;})
+            function InserindoNota(content) {
+                var valores = {
+                    url: content
+                };
+                fetch("http://pblelcoma-final.herokuapp.com/notafiscal",
+                    {
+                        method: 'post',
+                        mode: 'cors',
+                        cache: 'no-cache',
+                        credentials: 'same-origin',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        redirect: 'follow',
+                        referrerPolicy: 'no-referrer',
+                        body: JSON.stringify(valores)
 
-                        .then(function (res)
-                        { 
-                            console.log(res.json())
-                        })
-                        .catch(function(error){
-                            console.log(error);
-                        }) 
+                    })
+
+                    .then((res) => res.json())
+                    .then((result) => {
+                        console.log(result)
+                    }).catch(function (error) {
+                        console.error(error);
+                    })
             }
         </script>
 
