@@ -109,33 +109,6 @@
                 hiddenNewInvoice();
             }
 
-
-            function InserindoNota(content) {
-                var valores = {
-                    url: content
-                };
-                fetch("https://pblelcoma-final.herokuapp.com/notafiscal",
-                    {
-                        method: 'post',
-                        mode: 'cors',
-                        cache: 'no-cache',
-                        credentials: 'same-origin',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        redirect: 'follow',
-                        referrerPolicy: 'no-referrer',
-                        body: JSON.stringify(valores)
-
-                    })
-
-                    .then((res) => res.json())
-                    .then((result) => {
-                        console.log(result)
-                    }).catch(function (error) {
-                        console.error(error);
-                    })
-            }
         </script>
 
     </section>
