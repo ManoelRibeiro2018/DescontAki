@@ -15,19 +15,19 @@ function startToast() {
         position: "right",
         backgroundColor: "rgb(10 187 10)",
         stopOnFocus: true,
-        close: true,
+        close: false,
         className: "showToast"
     }).showToast();
 }
 function startToastError() {
     Toastify({
         text: `${msgError}`,
-        duration: 300000,
+        duration: 3000,
         gravity: "top",
         position: "right",
         backgroundColor: "red",
         stopOnFocus: true,
-        close: true,
+        close: false,
         className: "showToast"
     }).showToast();
 }
