@@ -151,7 +151,7 @@ function calculateGoal() {
             } else {
                 button.disabled = false;
             }
-            const totalGoal = "500.00";
+            const totalGoal = "30.00";
             document.getElementById("goalValue").innerHTML = `R$${totalGoal}`;
 
             if (totalValueRegistered >= totalGoal && !localStorage.getItem('activeMission')) {
