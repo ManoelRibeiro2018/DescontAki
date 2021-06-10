@@ -78,7 +78,7 @@ fetch(`https://pblelcoma-final.herokuapp.com/cupons/usuario/${codigoUsuairo}`, {
                         result[index].descricao +
                         ", no valor de: " +
                         result[index].valor +
-                        "%";
+                        "%, Código: " + result[index].codigo;
                     h2.className = "Pcupom";
                     p.className = "H2cupom";
                 }
