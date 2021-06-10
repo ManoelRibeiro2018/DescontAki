@@ -3,7 +3,7 @@ body {
 	overflow-x: hidden;
 }
 section#centro {
-	text-align: center;
+	text-align: center !important;
 }
 
 h1 {
@@ -191,7 +191,7 @@ a.links:hover {
 }
 
 .couponsMissions {
-	text-align: center;
+	text-align: center !important;
 }
 .couponsMissions label {
 	font-weight: normal;
