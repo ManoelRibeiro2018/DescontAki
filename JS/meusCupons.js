@@ -143,7 +143,7 @@ function calculateGoal() {
         })
         .then(() => {
             document.getElementById("loading").style.display = 'none';
-            document.getElementById("totalCadastrado").innerHTML = ` R$${totalValueRegistered}`;
+            document.getElementById("totalCadastrado").innerHTML = ` R$${totalValueRegistered.toFixed(2)}`;
             let activateCoupon = true;
             const button = document.querySelector("button");
             if (localStorage.getItem('activeMission')) {
